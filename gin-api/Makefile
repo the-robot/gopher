@@ -1,7 +1,4 @@
-.PHONY: setup doc lint vet\
-		network start stop down\
-		build migrate\
-		test
+.PHONY: setup doc lint vet test, start
 
 setup:
 	sudo pip install pre-commit
