@@ -1,0 +1,17 @@
+development:
+  dialect: "mongo"
+  database: "apidb"
+  host: "mongod"
+  port: "5432"
+  user: "admin"
+  password: "secret"
+  pool: 5
+
+test:
+  dialect: "mongo"
+  database: "apidb_test"
+  host: "127.0.0.1"
+  port: "5899"
+  user: "admin"
+  password: "secret"
+  pool: 5

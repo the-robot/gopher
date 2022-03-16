@@ -1,0 +1,3 @@
+#!/bin/sh
+
+go vet --vettool=$(which shadow) ./...

@@ -1,0 +1,30 @@
+[gin]
+    [gin.public]
+        port  = 8080
+        host  = "127.0.0.1"
+        debug = true
+        [gin.public.noauth]
+            routes = [
+                "/auth/login",
+                "/auth/logout",
+            ]
+        [gin.public.jwt]
+            secret = "secret"
+    [gin.admin]
+        port  = 8081
+        host  = "127.0.0.1"
+        debug = true
+        [gin.admin.noauth]
+            routes = [
+                "/auth/login",
+                "/auth/logout",
+            ]
+        [gin.admin.jwt]
+            secret = "secret"
+
+[database.config]
+    host          = "mongodb"
+    port          = "5432"
+    database_name = "apidb"
+    username      = "admin"
+    password      = "secret"

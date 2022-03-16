@@ -1,0 +1,38 @@
+name: Testing
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: docker-practice/actions-setup-docker@master
+      - uses: actions/setup-go@v2
+        with:
+          stable: 'false'
+          go-version: '1.17'
+
+      - name: Setup Go environment
+        run: |
+          go get -u github.com/kyoh86/richgo
+          go install
+
+      - name: Run unit and integration test
+        run: |
+          go clean -testcache
+          richgo test -covermode=atomic -coverprofile=coverage.out -tags=unit,integration -p 1 ./apps/...
+
+      - name: Upload coverage to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+#      - name: Run functional test
+#        run: |
+#          go clean -testcache
+#          richgo test -tags=functional -p 1 ./functionaltests/...

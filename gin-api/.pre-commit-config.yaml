@@ -1,0 +1,30 @@
+repos:
+  - repo: local
+    hooks:
+      - id: gofmt
+        name: gofmt
+        entry: gofmt -s -w .
+        language: system
+        types: [ go ]
+        description: Format your Go code
+
+      - id: goimports
+        name: goimports
+        entry: goimports -w .
+        language: system
+        types: [ go ]
+        description: Format your Go imports
+
+      - id: errcheck
+        name: errcheck
+        entry: sh scripts/pre-commit-err-check.sh
+        files: '\.go$'
+        language: system
+        description: Check your Go source code with errcheck
+
+      - id: govet
+        name: govet
+        entry: sh scripts/pre-commit-go-vet.sh
+        files: '\.go$'
+        language: system
+        description: Analyze your Go code
